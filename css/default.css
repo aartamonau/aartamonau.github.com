@@ -29,11 +29,13 @@ div.wrapper {
 }
 
 div.footer {
-    height     : 60px;
-    margin-top : -60px;
+    height     : 29px;
+    margin-top : -30px;
     clear      : both;
     font-size  : 90%;
     text-align : center;
+    background-color : #bbb;
+    border-top : #999 1px solid;
 }
 
 div.header {
@@ -49,7 +51,7 @@ div.header h1 {
 }
 
 div.content {
-    padding-bottom: 100px;
+    padding-bottom: 60px;
     width: 70%;
     margin-left: auto;
     margin-right: auto;
