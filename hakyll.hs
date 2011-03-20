@@ -76,6 +76,12 @@ main = hakyll $ do
             >>> withMenu
             >>> applyTemplateCompiler "templates/default.html"
 
+    route   "posts/*" $ setExtension "html"
+    compile "posts/*" $ pageCompiler
+        >>> applyTemplateCompiler "templates/post.html"
+        >>> withMenu
+        >>> applyTemplateCompiler "templates/default.html"
+
     -- Templates
     compile "templates/*" templateCompiler
     compile "templates/menu/*" templateCompiler
