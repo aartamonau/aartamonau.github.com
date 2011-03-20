@@ -18,15 +18,10 @@ import Data.String ( fromString )
 dumpMeta :: Compiler (Page a) (Page a)
 dumpMeta = unsafeCompiler (\p -> (print $ pageMetadata p) >> return p)
 
-pages    = [ "index.markdown"
-           , "projects.markdown"
-           , "about.markdown"
-           ]
-
-pageUrls = Map.fromList $ map (id &&& getUrl) pages
-  where getUrl = ('/' :) . replaceAll "\\..+$" (const ".html")
-
-pageUrl  = fromJust . flip Map.lookup pageUrls
+pages = [ "index.markdown"
+        , "projects.markdown"
+        , "about.markdown"
+        ]
 
 withMenu :: Compiler (Page a) (Page a)
 withMenu =
@@ -43,7 +38,9 @@ withMenu =
           proc (current, pageName) -> do
             dstPage <- readPageCompiler >>> addDefaultFields -< resource pageName
             let dstTitle = getField "title" dstPage
-            let dstUrl   = pageUrl pageName
+
+            dstRoute <- fmap fromJust getRouteFor -< fromString pageName
+            let dstUrl = toUrl dstRoute
 
             let mapping  = [("url", dstUrl), ("title", dstTitle)]
             let render   = renderTemplate "template"
