@@ -59,6 +59,7 @@ div.content {
 
 a {
     color: black;
+    outline: none;
 }
 
 h2 {
