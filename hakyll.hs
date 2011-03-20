@@ -6,6 +6,8 @@ import Hakyll
 import Control.Monad ( forM_ )
 import Control.Arrow ( (>>>), (&&&), arr, returnA )
 
+import Data.List ( isPrefixOf )
+
 import Data.Map ( Map )
 import qualified Data.Map as Map
 
@@ -46,9 +48,12 @@ withMenu =
             let mapping  = [("url", dstUrl), ("title", dstTitle)]
             let render   = renderTemplate "template"
 
-            if current == pageName
+            if current == pageName || (isBlogPost current && isBlog pageName)
                then renderTemplate "templates/menu/current.html" -< mapping
                else renderTemplate "templates/menu/item.html"    -< mapping
+
+          where isBlogPost = isPrefixOf "posts/"
+                isBlog     = isPrefixOf "index"
 
         resource :: String -> Resource
         resource = Resource . fromString
@@ -58,7 +63,6 @@ withMenu =
           arr (fromMap . Map.fromList)   >>>
           applyTemplateCompiler template >>>
           arr pageBody
-        
 
 main :: IO ()
 main = hakyll $ do
