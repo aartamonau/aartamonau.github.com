@@ -22,7 +22,7 @@ pages    = [ "index.markdown"
            ]
 
 pageUrls = Map.fromList $ map (id &&& getUrl) pages
-  where getUrl = replaceAll "\\..+$" (const ".html")
+  where getUrl = ('/' :) . replaceAll "\\..+$" (const ".html")
 
 pageUrl  = fromJust . flip Map.lookup pageUrls
 
