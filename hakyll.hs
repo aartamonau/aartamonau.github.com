@@ -36,7 +36,7 @@ withMenu =
   where renderItem :: Compiler (String, String) String
         renderItem =
           proc (current, pageName) -> do
-            (title, url) <- pageInfo -< pageName
+            (title, url, _) <- pageInfo -< pageName
 
             let mapping  = [("url", url), ("title", title)]
             let render   = renderTemplate "template"
@@ -57,21 +57,25 @@ withMenu =
           applyTemplateCompiler template >>>
           arr pageBody
 
--- title + url
-type PageInfo = (String, String)
+-- title, url and date
+type PageInfo = (String, String, String)
 
 pageInfo :: Compiler FilePath PageInfo
 pageInfo =
   proc path -> do
-    page  <- readPageCompiler >>> addDefaultFields -< resource path
-    route <- fmap fromJust getRouteFor             -< parseIdentifier path
+    page  <- readPageCompiler >>> postProcess -< resource path
+    route <- fmap fromJust getRouteFor        -< parseIdentifier path
 
     let title = getField "title" page
     let url   = toUrl route
+    let date  = getField "date" page
 
-    returnA -< (title, url)
+    returnA -< (title, url, date)
 
-  where resource = Resource . fromString
+  where resource    = Resource . fromString
+        dateFormat  = "%B %e, %Y"
+        postProcess = addDefaultFields
+                  >>> arr (renderDateField "date" dateFormat "")
 
 main :: IO ()
 main = hakyll $ do
