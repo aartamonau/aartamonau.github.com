@@ -36,13 +36,9 @@ withMenu =
   where renderItem :: Compiler (String, String) String
         renderItem =
           proc (current, pageName) -> do
-            dstPage <- readPageCompiler >>> addDefaultFields -< resource pageName
-            let dstTitle = getField "title" dstPage
+            (title, url) <- pageInfo -< pageName
 
-            dstRoute <- fmap fromJust getRouteFor -< fromString pageName
-            let dstUrl = toUrl dstRoute
-
-            let mapping  = [("url", dstUrl), ("title", dstTitle)]
+            let mapping  = [("url", url), ("title", title)]
             let render   = renderTemplate "template"
 
             if current == pageName || (isBlogPost current && isBlog pageName)
@@ -60,6 +56,22 @@ withMenu =
           arr (fromMap . Map.fromList)   >>>
           applyTemplateCompiler template >>>
           arr pageBody
+
+-- title + url
+type PageInfo = (String, String)
+
+pageInfo :: Compiler FilePath PageInfo
+pageInfo =
+  proc path -> do
+    page  <- readPageCompiler >>> addDefaultFields -< resource path
+    route <- fmap fromJust getRouteFor             -< parseIdentifier path
+
+    let title = getField "title" page
+    let url   = toUrl route
+
+    returnA -< (title, url)
+
+  where resource = Resource . fromString
 
 main :: IO ()
 main = hakyll $ do
