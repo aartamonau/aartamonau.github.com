@@ -88,7 +88,10 @@ SITE_PRE_PROCESSORS = {
                'variable' : 'blog_node',
                'path'     : 'content/blog/posts'
         }
-    }
+    },
+    'blog/posts' : {
+        'utils.pre_processors.DateInjector' : {}
+     }
 }
 
 CONTEXT = {

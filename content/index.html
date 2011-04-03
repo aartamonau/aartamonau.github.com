@@ -37,7 +37,7 @@
     <ul>
       {% for post in posts %}
       <li>
-        <span>{{ post.updated|default:post.created|date:"d M Y" }}</span>
+        <span>{{ post.created|date:"d M Y" }}</span>
         <a href="{{ post.url }}">{{ post.title }}</a>
       </li>
       {% endfor %}
