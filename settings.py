@@ -82,6 +82,15 @@ SITE_POST_PROCESSORS = {
     #    }
 }
 
+SITE_PRE_PROCESSORS = {
+    '/' : {
+        'hydeengine.site_pre_processors.NodeInjector' : {
+               'variable' : 'blog_node',
+               'path'     : 'content/blog/posts'
+        }
+    }
+}
+
 CONTEXT = {
     'GENERATE_CLEAN_URLS': GENERATE_CLEAN_URLS
 }

@@ -79,7 +79,15 @@ div#footer span {
     margin-bottom: auto;
 }
 
-div#main
-{
+div#main {
     padding-bottom: 30px;
 }
+
+div#posts ul {
+    list-style-type: none;
+}
+
+div#posts ul span {
+    color: #777;
+    margin-right: 1em;
+};
