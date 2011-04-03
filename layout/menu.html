@@ -1,0 +1,40 @@
+{% load utils %}
+
+<div class="menu">
+  <ul>
+
+    <li>
+      <a href="{{ site.listing_url }}"
+         {% ifequal page.module site.module %}
+         class="current"
+         {% endifequal %}>
+        Home
+      </a>
+    </li>
+
+    {% for node in site.children|sort_by:"listing_page.order" %}
+      <li>
+        <a href="{{ node.listing_url }}"
+           {% ifequal page.module node.module %}
+             class="current"
+           {% endifequal %}>
+          {{ node.listing_page.title|unslugify }}
+        </a>
+      </li>
+    {% endfor %}
+
+    <li class="icon">
+      <a>
+        <img alt="feed" src="{{ site.url }}/media/images/feed-icon.png">
+        Subscribe
+      </a>
+    </li>
+
+    <li class="icon">
+      <a href="http://twitter.com/aartamonau">
+        <img alt="twitter" src="{{ site.url }}/media/images/twitter-icon.png">
+        Twitter
+      </a>
+    </li>
+  </ul>
+</div>

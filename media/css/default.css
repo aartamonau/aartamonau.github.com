@@ -153,6 +153,7 @@ div.menu li.icon {
     width: auto;
     background-color: #191919;
     font-size: 12px;
+    margin-left: 1em;
 }
 
 div.menu li.icon a {
