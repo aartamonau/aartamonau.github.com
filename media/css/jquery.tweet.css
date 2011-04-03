@@ -2,7 +2,6 @@
     font-family: Georgia, serif;
     font-size: 100%;
     color: #085258;
-    width: 500px;
 }
 
 /* .tweet .tweet_list, .query .tweet_list { */
@@ -21,11 +20,16 @@
     text-transform: uppercase;
 }
 
-/* .tweet .tweet_list li, */
-/* .query .tweet_list li { */
-/*     overflow-y: auto; */
-/*     overflow-x: hidden; */
-/*     padding: .5em; */
+.tweet .tweet_list li,
+.query .tweet_list li {
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: .5em;
+}
+
+/* .tweet .tweet_text :hover, */
+/* .query .tweet_text :hover { */
+/*     background-color: #eee; */
 /* } */
 
 .tweet .tweet_list li a,

@@ -61,8 +61,8 @@ MEDIA_PROCESSORS = {
     '*':{
         '.css':('hydeengine.media_processors.TemplateProcessor',),
         '.js':(
-                'hydeengine.media_processors.TemplateProcessor',
-                'hydeengine.media_processors.JSmin',),
+                'hydeengine.media_processors.TemplateProcessor',)
+                # 'hydeengine.media_processors.JSmin',),
     }
 }
 

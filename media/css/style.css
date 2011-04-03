@@ -1,5 +1,5 @@
 body {
-    background-color: #eee;
+    background-color: #fafafa;
 }
 
 div#menu {
@@ -7,6 +7,7 @@ div#menu {
     background-color: #191919;
     width: 100%;
     clear: both;
+    margin-bottom: 2em;
 }
 
 div#menu ul {
@@ -26,7 +27,7 @@ div#menu li {
 }
 
 div#menu li a {
-    color: #eee;
+    color: #fafafa;
     display: block;
     padding: 0.5em 0;
     text-decoration: none;
@@ -34,7 +35,7 @@ div#menu li a {
 }
 
 div#menu li a.current {
-    background-color: #eee !important;
+    background-color: #fafafa !important;
     color: #111 !important;
 }
 
@@ -55,7 +56,7 @@ div#menu li.icon a {
     margin: 0;
     padding: 0;
     background-color: #191919;
-    color: #eee;
+    color: #fafafa;
 }
 
 div#menu li.icon img {
